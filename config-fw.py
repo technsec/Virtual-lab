@@ -72,7 +72,7 @@ def load_and_commit_config():
     global api_key
     global MgmtIp
     global config_file
-    api_url = f"https://{MgmtIp}/api"
+    api_url = "https://10.100.0.4/api"
     headers = {
         "Content-Type": "application/xml",
         "X-PAN-KEY": api_key
@@ -84,7 +84,7 @@ def load_and_commit_config():
     config_content = file.read()
 
     # Send the request to load the configuration
-    load_url = f"{api_url}/running-config"
+    load_url = "https://10.100.0.4/api/running-config"
     response = requests.put(load_url, headers=headers, data=config_content, verify=False)
 
     if response.status_code == 200:
@@ -94,7 +94,7 @@ def load_and_commit_config():
         return
 
     # Send the request to commit the configuration
-    commit_url = f"{api_url}/commit"
+    commit_url = "https://10.100.0.4/api/commit"
     response = requests.post(commit_url, headers=headers, verify=False)
 
     if response.status_code == 200:
